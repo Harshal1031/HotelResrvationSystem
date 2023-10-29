@@ -19,10 +19,21 @@ public class HotelReservationSystem {
            hrs.addHotel(hotel1);
            hrs.addHotel(hotel2);
            hrs.addHotel(hotel3);
-           
+           Scanner sc=new Scanner(System.in);
            
          //  hrs.countMinimumRate(1, hrs.togetDay(), hrs.togetDay());
+           
+           System.out.println("What Type of Customer are you");
+           System.out.println("1.For Regular Customer");
+           System.out.println("2.For Reward Customer");
+           System.out.println("Enter your choice");
+           int choice=sc.nextInt();
+           if(choice==1) {
            hrs.BestRated(1, hrs.togetDay(), hrs.togetDay());
+           }else {
+               hrs.BestRated(2, hrs.togetDay(), hrs.togetDay());
+   
+           }
 
 	}
 	private void BestRated(int i, String togetDay, String togetDay2) {
