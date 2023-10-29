@@ -21,8 +21,27 @@ public class HotelReservationSystem {
            hrs.addHotel(hotel3);
            
            
-           hrs.countMinimumRate(1, hrs.togetDay(), hrs.togetDay());
+         //  hrs.countMinimumRate(1, hrs.togetDay(), hrs.togetDay());
+           hrs.BestRated(1, hrs.togetDay(), hrs.togetDay());
+
 	}
+	private void BestRated(int i, String togetDay, String togetDay2) {
+		int sum1=hotelList.get(0).costForDay(i, togetDay)+hotelList.get(0).costForDay(i, togetDay2);
+		int sum2=hotelList.get(1).costForDay(i, togetDay)+hotelList.get(1).costForDay(i, togetDay2);
+		int sum3=hotelList.get(2).costForDay(i, togetDay)+hotelList.get(2).costForDay(i, togetDay2);
+        if(hotelList.get(0).getRating()>hotelList.get(1).getRating()&&hotelList.get(0).getRating()>hotelList.get(2).getRating()) {
+        	System.out.println("The minimum rate for the hotel "+hotelList.get(0).getHotelName()+" and it is "+sum1+"$"+" and the Rating of Hotel is :"+hotelList.get(0).getRating());
+        }else if(hotelList.get(1).getRating()>hotelList.get(2).getRating()) {
+        	System.out.println("The minimum rate for the hotel "+hotelList.get(1).getHotelName()+" and it is "+sum2+"$"+" and the Rating of Hotel is :"+hotelList.get(1).getRating());
+
+        }else {
+        	System.out.println("The minimum rate for the hotel "+hotelList.get(2).getHotelName()+" and it is "+sum3+"$"+" and the Rating of Hotel is :"+hotelList.get(2).getRating());
+
+        }
+
+		
+	}
+
 	public String togetDay(){
         Scanner sc = new Scanner(System.in);
 
