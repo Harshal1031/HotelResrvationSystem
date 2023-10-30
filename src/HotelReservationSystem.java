@@ -4,6 +4,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class HotelReservationSystem {
     List<Hotel> hotelList=new ArrayList<Hotel>();
@@ -20,8 +21,17 @@ public class HotelReservationSystem {
            hrs.addHotel(hotel2);
            hrs.addHotel(hotel3);
            Scanner sc=new Scanner(System.in);
-           
-         //  hrs.countMinimumRate(1, hrs.togetDay(), hrs.togetDay());
+           System.out.println("What Type of Customer are you");
+           System.out.println("1.For Regular Customer");
+           System.out.println("2.For Reward Customer");
+           System.out.println("Enter your choice");
+           int choice1=sc.nextInt();
+           if(choice1==1) {
+
+           hrs.countMinimumRate(1, hrs.togetDay(), hrs.togetDay());
+           }else {
+               hrs.countMinimumRate(2, hrs.togetDay(), hrs.togetDay());
+           }
            
            System.out.println("What Type of Customer are you");
            System.out.println("1.For Regular Customer");
@@ -34,8 +44,42 @@ public class HotelReservationSystem {
                hrs.BestRated(2, hrs.togetDay(), hrs.togetDay());
    
            }
+           
+           //using stream
+           System.out.println("What Type of Customer are you");
+           System.out.println("1.For Regular Customer");
+           System.out.println("2.For Reward Customer");
+           System.out.println("Enter your choice");
+           int choice3=sc.nextInt();
+           if(choice3==1) {
+
+           hrs.countMinimumRateUsingJavaStream(1, hrs.togetDay(), hrs.togetDay());
+           }else {
+               hrs.countMinimumRateUsingJavaStream(2, hrs.togetDay(), hrs.togetDay());
+           }
+
 
 	}
+	private void countMinimumRateUsingJavaStream(int i, String togetDay, String togetDay2) {
+		  List<Hotel> cheapestHotels = hotelList.stream()
+	                .sorted((hotel1, hotel2) -> {
+
+	                    int sum1 = hotel1.costForDay(i, togetDay) + hotel1.costForDay(i, togetDay2);
+	                    int sum2 = hotel2.costForDay(i, togetDay) + hotel2.costForDay(i, togetDay2);
+	                    return Integer.compare(sum1, sum2);
+
+	                })
+	                .collect(Collectors.toList());
+	        System.out.println(cheapestHotels.get(0).getHotelName());
+	        System.out.print(" "+cheapestHotels.get(0).getRating());
+	        System.out.println();
+	        int sum1 = cheapestHotels.get(0).costForDay(i, togetDay) + cheapestHotels.get(0).costForDay(i, togetDay);
+	        System.out.println("And The Rent For The Stay is :"+sum1);
+
+
+	                	
+		  }
+
 	private void BestRated(int i, String togetDay, String togetDay2) {
 		int sum1=hotelList.get(0).costForDay(i, togetDay)+hotelList.get(0).costForDay(i, togetDay2);
 		int sum2=hotelList.get(1).costForDay(i, togetDay)+hotelList.get(1).costForDay(i, togetDay2);
